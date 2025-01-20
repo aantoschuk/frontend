@@ -1,0 +1,9 @@
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.save {
+  margin-top: 10px;
+  padding: 10px 0;
+}
