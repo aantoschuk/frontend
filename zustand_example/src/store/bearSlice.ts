@@ -1,7 +1,9 @@
-import { create } from "zustand";
+import { StateCreator } from "zustand";
+import { FishSlice } from "./fishSlice";
 
-export interface BearState {
+export interface BearSlice {
   bears: number;
+  hunger: number;
   removeAllBears: () => void;
   increasePopulation: (by: number) => void;
 }
@@ -9,8 +11,11 @@ export interface BearState {
 /* To avoid covariant and contravariant  need to use create <BearState>()
  * as TS cannot understood from where values came from it returns T as unknown
  */
-export const useStore = create<BearState>()((set) => ({
+export const createBearSlice: StateCreator<BearSlice> = (set) => ({
   bears: 0,
+  hunger: 0,
   removeAllBears: () => set(() => ({ bears: 0 })),
   increasePopulation: (by) => set((state) => ({ bears: state.bears + by })),
-}));
+  //eatFish:  set((state) => ({ bears: state.bears + 1, fishes: state.fishes + 1 }))
+});
+

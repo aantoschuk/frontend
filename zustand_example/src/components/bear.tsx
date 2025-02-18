@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-import { useStore } from "../hook/useStore";
+import { useBoundStore } from "../store/useBoundStore";
 
 export const Bear = () => {
   return (
@@ -12,14 +12,22 @@ export const Bear = () => {
 };
 
 const BearCounter = () => {
-  const bears = useStore((state) => state.bears);
-  return <p>Number of bears: {bears} </p>;
+  const bears = useBoundStore((state) => state.bears);
+  const hunger = useBoundStore((state) => state.hunger);
+  return (
+    <div>
+      <p>Number of bears: {bears} </p>
+      <p>Hunger: {hunger} </p>
+    </div>
+  );
 };
 
-// For this simple example, we do not need to optimize that 
-// but just for example purpose as how to optimize 
+// For this simple example, we do not need to optimize that
+// but just for example purpose as how to optimize
 const BearControls = memo(() => {
-  const { increasePopulation, removeAllBears } = useStore((state) => state);
+  const { increasePopulation, removeAllBears, eatFish } = useBoundStore(
+    (state) => state,
+  );
 
   // Since there is no props in component i do not need to wrap it in useCallback
   const handleOnClick = () => {
@@ -29,6 +37,7 @@ const BearControls = memo(() => {
     <>
       <button onClick={handleOnClick}>Increase</button>
       <button onClick={removeAllBears}>Reset</button>
+      <button onClick={eatFish}>Eat</button>
     </>
   );
 });

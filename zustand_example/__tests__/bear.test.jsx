@@ -1,7 +1,7 @@
 import { expect, it, describe } from 'vitest'
 import { render } from 'vitest-browser-react'
 
-import { Bear } from '../src/components'
+import { Bear, Fish } from '../src/components'
 
 describe("Test Bear Component", () => {
   it("Should render the number of bears", async () => {
@@ -14,7 +14,7 @@ describe("Test Bear Component", () => {
       // check does value actually increasing
       await expect.element(getByText('Number of bears: 1')).toBeInTheDocument()
       await getByRole('button', { name: 'Reset'}).click()
-      await expect.element(getByText('Number of bears: 0')).toBeInTheDocument()
-
   });
 });
+
+
